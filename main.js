@@ -65,9 +65,69 @@ const restaurant = {
 // Il miglior metodo per clonare l'oggetto restaurant è structuredClone() in quanto copierebbe anche gli oggetti complessi (es. data)
 
 //Code Question 5 bonus
+const hamburger5 = {
+  name: "Cheese Burger",
+  weight: 250,
+  maker: {
+    name: "Anonymous Chef",
+    restaurant: {
+      name: "Hyur's Burgers",
+      address: "Main Street, 123",
+      isOpen: true,
+    },
+    age: 29,
+  },
+};
+
+const newRestaurant = { ...hamburger5.maker.restaurant };
+newRestaurant.name = "Hyur's II";
+newRestaurant.address = "Second Street, 12";
+const secondBurger5 = { ...hamburger5 };
+secondBurger5.maker.restaurant = newRestaurant;
+secondBurger5.maker.name = "Chef Hyur";
+
+console.log(hamburger5.maker.name); // "Chef Hyur"
+console.log(secondBurger5.maker.name); // "Chef Hyur"
+console.log(hamburger5.maker.restaurant.name); // "Hyur's II"
+console.log(secondBurger5.maker.restaurant.name); // "Hyur's II"
+//son stati creati 5 oggetti
 
 //Code Question 6 bonus
+const chef6 = {
+  name: "Chef Hyur",
+  age: 29,
+  makeBurger: (num = 1) => {
+    console.log(`Ecco ${num} hamburger per te!`);
+  },
+  restaurant: {
+    name: "Hyur's Burgers",
+    welcomeClient: () => {
+      console.log("Benvenuto!");
+    },
+    address: {
+      street: "Main Street",
+      number: 123,
+      showAddress: () => {
+        console.log("Main Street 123");
+      },
+    },
+    isOpen: true,
+  },
+};
+//Qual è il metodo migliore per clonare l’oggetto chef6, e perché?
+//Il miglior metodo è lo spread perchè copia anche le funzioni anche se ci son oggetti annidati
+const chef6copy = {
+  ...chef6,
+  restaurant: {
+    ...chef6.restaurant,
+    address: {
+      ...chef6.restaurant.address,
+    },
+  },
+};
+console.log(chef6copy);
 
 //Snack  (Bonus)
-//Crea una funzione che permette la copia profonda (deep copy) di un oggetto, che copia anche i suoi metodi (proprietà che contengono funzioni). Usa l’oggetto di Code Question 6 come test.
+//Crea una funzione che permette la copia profonda (deep copy) di un oggetto, che copia anche i suoi metodi (proprietà che contengono funzioni).
+//Usa l’oggetto di Code Question 6 come test.
 //Serve usare una funzione ricorsiva! (fai un po’ di ricerca)
